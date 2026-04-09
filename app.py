@@ -89,7 +89,7 @@ try:
         st.dataframe(data.tail(10))
 
     with col2:
-        st.subheader("🤖 AI 投資洞察 (Bonus)")
+        st.subheader("🤖 AI 投資洞察")
         if st.button("產生 AI 分析報告"):
             
             # 從 session_state 讀取剛剛登錄的 Key
