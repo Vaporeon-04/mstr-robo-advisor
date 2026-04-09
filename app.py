@@ -81,8 +81,17 @@ try:
     col1, col2 = st.columns([2, 1])
     
     with col1:
+        st.subheader(f"MSTR vs BTC 漲跌幅比較 ({selected_timeframe})")
+        
+        # 1. 計算標準化績效 (從區間第一天算起的累積漲跌幅 %)
+        # 使用 iloc[0] 抓取該期間第一天的價格當作基準分母
+        data['MSTR_績效(%)'] = ((data['Close'] - data['Close'].iloc[0]) / data['Close'].iloc[0]) * 100
+        data['BTC_績效(%)'] = ((data['BTC_Price'] - data['BTC_Price'].iloc[0]) / data['BTC_Price'].iloc[0]) * 100
+        
+        # 2. 畫出兩條線在同一張圖上，就能完美看出連動性與震幅差異
+        st.line_chart(data, x='Date', y=['MSTR_績效(%)', 'BTC_績效(%)'])
+        
         st.subheader(f"MSTR Premium to NAV ({selected_timeframe}) 趨勢圖")
-        # 改用更穩定的繪圖語法，明確指定 X 與 Y 軸，解決圖表空白問題
         st.line_chart(data, x='Date', y='Premium_Pct')
         
         st.subheader("數據預覽")
