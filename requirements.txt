@@ -1,0 +1,5 @@
+streamlit
+yfinance
+pycoingecko
+pandas
+google-generativeai
